@@ -122,9 +122,9 @@ button:active{opacity:.8}
 
 <small>PROXY STATUS</small>
 
-<div class="value" id="status">● Not Connected</div>
+<div class="value" id="status">Checking API...</div>
 
-<p>Backend connection not configured</p>
+<p id="apiMessage">Checking backend connection...</p>
 
 </div>
 
@@ -150,7 +150,7 @@ button:active{opacity:.8}
 
 <button onclick="searchVend()">Search Vend</button>
 
-<p id="vendResult" class="result">Waiting for backend...</p>
+<p id="vendResult" class="result">Waiting for data source...</p>
 
 </div>
 
@@ -162,7 +162,7 @@ button:active{opacity:.8}
 
 <button onclick="searchWorld()">Search World</button>
 
-<p id="worldResult" class="result">Waiting for backend...</p>
+<p id="worldResult" class="result">Waiting for data source...</p>
 
 </div>
 
@@ -182,21 +182,71 @@ button:active{opacity:.8}
 
 <h3>⚙️ Panel Information</h3>
 
-<p>Version: 2.1</p>
+<p>Version: 2.2</p>
 
-<p>Platform: GitHub Pages</p>
+<p>Platform: Vercel</p>
 
-<p>Backend: Not Connected</p>
+<p id="backendInfo">Backend: Checking...</p>
+
+<button class="secondary" onclick="checkBackend()">Check API Again</button>
 
 <button class="secondary" onclick="resetSettings()">Reset Settings</button>
 
 </div>
 
-<div class="footer">GT PROXY • Dashboard v2.1</div>
+<div class="footer">GT PROXY • Dashboard v2.2</div>
 
 </div>
 
 <script>
+
+async function checkBackend(){
+
+ const status=document.getElementById("status");
+
+ const message=document.getElementById("apiMessage");
+
+ const backend=document.getElementById("backendInfo");
+
+ status.textContent="Checking...";
+
+ message.textContent="Connecting to API...";
+
+ backend.textContent="Backend: Checking...";
+
+ try{
+
+  const response=await fetch("/api/health");
+
+  if(!response.ok) throw new Error("API unavailable");
+
+  const data=await response.json();
+
+  if(data.status==="online"){
+
+   status.textContent="● API Online";
+
+   message.textContent="API is running. Proxy is not connected.";
+
+   backend.textContent="Backend: API Online • Data source missing";
+
+  }else{
+
+   throw new Error("API offline");
+
+  }
+
+ }catch(error){
+
+  status.textContent="● API Offline";
+
+  message.textContent="Could not connect to the API.";
+
+  backend.textContent="Backend: Not Connected";
+
+ }
+
+}
 
 function saveSettings(){
 
@@ -242,7 +292,7 @@ function searchVend(){
 
  document.getElementById("vendResult").textContent=
 
- world?"Backend required to search vend locations in "+world+".":"Please enter a world name.";
+ world?"API is online, but a real Vend Finder data source is not connected yet.":"Please enter a world name.";
 
 }
 
@@ -252,7 +302,7 @@ function searchWorld(){
 
  document.getElementById("worldResult").textContent=
 
- world?"World search backend is not connected yet.":"Please enter a world name.";
+ world?"API is online, but a real World Finder data source is not connected yet.":"Please enter a world name.";
 
 }
 
@@ -279,6 +329,8 @@ function resetSettings(){
 }
 
 loadSettings();
+
+checkBackend();
 
 </script>
 
