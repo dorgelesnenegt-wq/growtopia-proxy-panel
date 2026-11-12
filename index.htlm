@@ -8,7 +8,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>GT Proxy Panel</title>
+<title>GT Proxy Dashboard</title>
 
 <style>
 
@@ -18,45 +18,71 @@ body{
 
  margin:0;background:#10131d;color:white;
 
- font-family:Arial,sans-serif;padding:22px
+ font-family:Arial,sans-serif;padding:18px
 
 }
 
-.panel{
+.panel{max-width:520px;margin:20px auto}
 
- max-width:480px;margin:35px auto;
+.header{
 
- background:#1b2030;padding:25px;
+ text-align:center;padding:22px;
 
- border-radius:20px;border:1px solid #343d53
+ background:#1b2030;border:1px solid #343d53;
+
+ border-radius:18px;margin-bottom:18px
 
 }
 
-h1{color:#a78bfa;text-align:center}
+h1{color:#a78bfa;margin:5px}
 
 p{color:#aab2c5}
 
 .item{
 
- background:#292f43;padding:17px;
+ background:#1b2030;padding:18px;
 
- border-radius:12px;margin:13px 0
+ border-radius:13px;margin:12px 0;
+
+ border:1px solid #343d53
 
 }
 
-.value{font-size:19px;font-weight:bold}
+.item h3{margin:0 0 12px;color:#c4b5fd}
+
+small{color:#9ca3af}
+
+.value{font-size:18px;font-weight:bold;margin-top:7px}
 
 button{
 
- width:100%;padding:15px;border:0;
+ width:100%;padding:13px;border:0;
 
- border-radius:10px;background:#7955db;
+ border-radius:9px;background:#7955db;
 
- color:white;font-size:16px;margin-top:12px
+ color:white;font-size:15px;margin-top:10px;
+
+ cursor:pointer
 
 }
 
-small{color:#9ca3af}
+button:active{opacity:.7}
+
+input{
+
+ width:100%;padding:13px;margin-top:9px;
+
+ background:#10131d;border:1px solid #454d65;
+
+ border-radius:9px;color:white;font-size:15px
+
+}
+
+.secondary{background:#343d53}
+
+.result{color:#c4b5fd;margin-top:12px}
+
+.footer{text-align:center;color:#777;margin:25px}
 
 </style>
 
@@ -66,9 +92,13 @@ small{color:#9ca3af}
 
 <div class="panel">
 
+<div class="header">
+
 <h1>⚡ GT PROXY</h1>
 
-<p style="text-align:center">Personal Control Panel</p>
+<p>Personal Control Dashboard v2</p>
+
+</div>
 
 <div class="item">
 
@@ -80,41 +110,183 @@ small{color:#9ca3af}
 
 <div class="item">
 
-<small>SERVER STATUS</small>
+<small>PROXY STATUS</small>
 
 <div class="value" id="status">Not Connected</div>
 
-</div>
-
-<div class="item">
-
-<small>SERVER IP</small>
-
-<div class="value">Not configured</div>
+<small>Backend connection not configured</small>
 
 </div>
 
 <div class="item">
 
-<small>PROXY PORT</small>
+<h3>🌐 Server Settings</h3>
 
-<div class="value">Not configured</div>
+<input id="serverIP" placeholder="Server IP / Host">
+
+<input id="serverPort" placeholder="Proxy Port">
+
+<button onclick="saveSettings()">Save Settings</button>
+
+<p id="settingsResult" class="result"></p>
 
 </div>
 
-<button onclick="alert('Henüz gerçek sunucu kurulmadı!')">
+<div class="item">
 
-Server Settings
+<h3>🔎 Vend Finder</h3>
 
-</button>
+<input id="vendWorld" placeholder="World name">
 
-<p style="text-align:center">
+<button onclick="searchVend()">Search Vend</button>
 
-<small>GT Proxy • Personal Dashboard</small>
+<p id="vendResult" class="result">
+
+Waiting for backend...
 
 </p>
 
 </div>
+
+<div class="item">
+
+<h3>🌍 World Finder</h3>
+
+<input id="worldName" placeholder="Search world">
+
+<button onclick="searchWorld()">Search World</button>
+
+<p id="worldResult" class="result">
+
+Waiting for backend...
+
+</p>
+
+</div>
+
+<div class="item">
+
+<h3>♻️ Recycle Helper</h3>
+
+<p>Geri dönüşüm için yardımcı kontrol paneli.</p>
+
+<button onclick="recycleInfo()">Recycle Information</button>
+
+<p id="recycleResult" class="result"></p>
+
+</div>
+
+<div class="item">
+
+<h3>⚙️ Panel Information</h3>
+
+<p>Version: 2.0</p>
+
+<p>Platform: GitHub Pages</p>
+
+<p>Backend: Not Connected</p>
+
+<button class="secondary" onclick="resetSettings()">
+
+Reset Settings
+
+</button>
+
+</div>
+
+<div class="footer">
+
+GT Proxy • Personal Dashboard
+
+</div>
+
+</div>
+
+<script>
+
+function saveSettings(){
+
+ const ip=document.getElementById("serverIP").value.trim();
+
+ const port=document.getElementById("serverPort").value.trim();
+
+ if(!ip || !port){
+
+  document.getElementById("settingsResult").textContent=
+
+  "Please enter server IP and port.";
+
+  return;
+
+ }
+
+ localStorage.setItem("gt_server_ip",ip);
+
+ localStorage.setItem("gt_server_port",port);
+
+ document.getElementById("settingsResult").textContent=
+
+ "Settings saved locally.";
+
+}
+
+function searchVend(){
+
+ const world=document.getElementById("vendWorld").value.trim();
+
+ document.getElementById("vendResult").textContent=
+
+ world ? "Backend required to search vend locations in "+world+"."
+
+ : "Please enter a world name.";
+
+}
+
+function searchWorld(){
+
+ const world=document.getElementById("worldName").value.trim();
+
+ document.getElementById("worldResult").textContent=
+
+ world ? "World search backend is not connected yet."
+
+ : "Please enter a world name.";
+
+}
+
+function recycleInfo(){
+
+ document.getElementById("recycleResult").textContent=
+
+ "Recycle helper is ready for a future supported integration.";
+
+}
+
+function resetSettings(){
+
+ localStorage.removeItem("gt_server_ip");
+
+ localStorage.removeItem("gt_server_port");
+
+ document.getElementById("serverIP").value="";
+
+ document.getElementById("serverPort").value="";
+
+ document.getElementById("settingsResult").textContent=
+
+ "Local settings cleared.";
+
+}
+
+document.getElementById("serverIP").value=
+
+ localStorage.getItem("gt_server_ip") || "";
+
+document.getElementById("serverPort").value=
+
+ localStorage.getItem("gt_server_port") || "";
+
+</script>
 
 </body>
 
