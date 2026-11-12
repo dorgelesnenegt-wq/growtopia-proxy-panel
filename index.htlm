@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 
 <html lang="tr">
@@ -8,7 +10,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>GT Proxy Dashboard</title>
+<title>GT Proxy Dashboard v2</title>
 
 <style>
 
@@ -140,11 +142,7 @@ input{
 
 <button onclick="searchVend()">Search Vend</button>
 
-<p id="vendResult" class="result">
-
-Waiting for backend...
-
-</p>
+<p id="vendResult" class="result">Waiting for backend...</p>
 
 </div>
 
@@ -156,11 +154,7 @@ Waiting for backend...
 
 <button onclick="searchWorld()">Search World</button>
 
-<p id="worldResult" class="result">
-
-Waiting for backend...
-
-</p>
+<p id="worldResult" class="result">Waiting for backend...</p>
 
 </div>
 
@@ -186,19 +180,11 @@ Waiting for backend...
 
 <p>Backend: Not Connected</p>
 
-<button class="secondary" onclick="resetSettings()">
-
-Reset Settings
-
-</button>
+<button class="secondary" onclick="resetSettings()">Reset Settings</button>
 
 </div>
 
-<div class="footer">
-
-GT Proxy • Personal Dashboard
-
-</div>
+<div class="footer">GT Proxy • Personal Dashboard</div>
 
 </div>
 
