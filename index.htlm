@@ -269,7 +269,6 @@ document.getElementById("serverIP").value=
 document.getElementById("serverPort").value=
 
  localStorage.getItem("gt_server_port") || "";
-
 </script>
 
 </body>
