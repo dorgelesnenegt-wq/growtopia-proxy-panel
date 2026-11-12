@@ -1,101 +1,62 @@
 <!DOCTYPE html>
-
 <html lang="tr">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GT Proxy Panel</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10131d;color:white;
+ font-family:Arial,sans-serif;padding:22px
+}
+.panel{
+ max-width:480px;margin:35px auto;
+ background:#1b2030;padding:25px;
+ border-radius:20px;border:1px solid #343d53
 
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>GT Proxy Panel</title>
-
-  <style>
-
-    body {
-
-      margin: 0;
-
-      padding: 30px 15px;
-
-      background: #111827;
-
-      color: white;
-
-      font-family: Arial, sans-serif;
-
-      text-align: center;
-
-    }
-
-    .panel {
-
-      max-width: 400px;
-
-      margin: 40px auto;
-
-      padding: 25px;
-
-      background: #1f2937;
-
-      border-radius: 15px;
-
-    }
-
-    h1 { color: #38bdf8; }
-
-    .status {
-
-      color: #f87171;
-
-      font-weight: bold;
-
-    }
-
-    button {
-
-      padding: 12px 20px;
-
-      margin-top: 15px;
-
-      border: 0;
-
-      border-radius: 8px;
-
-      background: #0ea5e9;
-
-      color: white;
-
-      font-size: 16px;
-
-    }
-
-  </style>
-
+}
+h1{color:#a78bfa;text-align:center}
+p{color:#aab2c5}
+.item{
+ background:#292f43;padding:17px;
+ border-radius:12px;margin:13px 0
+}
+.value{font-size:19px;font-weight:bold}
+button{
+ width:100%;padding:15px;border:0;
+ border-radius:10px;background:#7955db;
+ color:white;font-size:16px;margin-top:12px
+}
+small{color:#9ca3af}
+</style>
 </head>
-
 <body>
-
-  <div class="panel">
-
-    <h1>GT Proxy Panel</h1>
-
-    <p>Server Location: Europe</p>
-
-    <p>Status: <span class="status">Not Connected</span></p>
-
-    <p>IP: Not Configured</p>
-
-    <p>Port: Not Configured</p>
-
-    <button onclick="alert('Server settings')">
-
-      Server Settings
-
-    </button>
-
-  </div>
-
+<div class="panel">
+<h1>⚡ GT PROXY</h1>
+<p style="text-align:center">Personal Control Panel</p>
+<div class="item">
+<small>SERVER LOCATION</small>
+<div class="value">🇪🇺 Europe</div>
+</div>
+<div class="item">
+<small>SERVER STATUS</small>
+<div class="value" id="status">Not Connected</div>
+</div>
+<div class="item">
+<small>SERVER IP</small>
+<div class="value">Not configured</div>
+</div>
+<div class="item">
+<small>PROXY PORT</small>
+<div class="value">Not configured</div>
+</div>
+<button onclick="alert('Henüz gerçek sunucu kurulmadı!')">
+Server Settings
+</button>
+<p style="text-align:center">
+<small>GT Proxy • Personal Dashboard</small>
+</p>
+</div>
 </body>
-
 </html>
