@@ -8,41 +8,91 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>GT Proxy Dashboard v2</title>
+<title>GT PROXY Dashboard</title>
 
 <style>
 
 *{box-sizing:border-box}
 
-body{margin:0;background:#10131d;color:white;font-family:Arial,sans-serif;padding:18px}
+body{
+
+ margin:0;padding:18px;
+
+ background:linear-gradient(145deg,#080b18,#11152b);
+
+ color:#fff;font-family:Arial,sans-serif
+
+}
 
 .panel{max-width:520px;margin:20px auto}
 
-.header{text-align:center;padding:22px;background:#1b2030;border:1px solid #343d53;border-radius:18px;margin-bottom:18px}
+.header{
 
-h1{color:#a78bfa;margin:5px}
+ text-align:center;padding:28px 15px;
 
-p{color:#aab2c5}
+ background:linear-gradient(135deg,#171b38,#24204a);
 
-.item{background:#1b2030;padding:18px;border-radius:13px;margin:12px 0;border:1px solid #343d53}
+ border:1px solid #6555bb;border-radius:20px;
 
-.item h3{margin:0 0 12px;color:#c4b5fd}
+ box-shadow:0 0 25px #6545bb33
 
-small{color:#9ca3af}
+}
 
-.value{font-size:18px;font-weight:bold;margin-top:7px}
+h1{color:#a78bfa;margin:5px;font-size:30px}
 
-button{width:100%;padding:13px;border:0;border-radius:9px;background:#7955db;color:white;font-size:15px;margin-top:10px;cursor:pointer}
+.header p{color:#a5b4fc}
 
-button:active{opacity:.7}
+.item{
 
-input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid #454d65;border-radius:9px;color:white;font-size:15px}
+ background:#171c32;padding:20px;
 
-.secondary{background:#343d53}
+ border:1px solid #303c65;border-radius:15px;
 
-.result{color:#c4b5fd;margin-top:12px}
+ margin:14px 0;box-shadow:0 5px 20px #0003
 
-.footer{text-align:center;color:#777;margin:25px}
+}
+
+.item h3{color:#a78bfa;margin-top:0}
+
+small{color:#94a3b8}
+
+.value{font-size:19px;font-weight:bold;margin-top:8px;color:#67e8f9}
+
+p{color:#b8c3dc;line-height:1.5}
+
+input{
+
+ width:100%;padding:14px;margin:8px 0;
+
+ background:#0d1328;border:1px solid #46527d;
+
+ border-radius:10px;color:white;font-size:15px;
+
+ outline:none
+
+}
+
+input:focus{border-color:#a78bfa;box-shadow:0 0 8px #a78bfa55}
+
+button{
+
+ width:100%;padding:14px;margin-top:10px;
+
+ background:linear-gradient(90deg,#6652d9,#3689db);
+
+ border:0;border-radius:10px;color:white;
+
+ font-size:15px;font-weight:bold;cursor:pointer
+
+}
+
+button:active{opacity:.8}
+
+.secondary{background:#303b5c}
+
+.result{color:#67e8f9;margin-top:12px}
+
+.footer{text-align:center;color:#64748b;margin:25px}
 
 </style>
 
@@ -56,7 +106,7 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 <h1>⚡ GT PROXY</h1>
 
-<p>Personal Control Dashboard v2</p>
+<p>Personal Control Dashboard</p>
 
 </div>
 
@@ -64,7 +114,7 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 <small>SERVER LOCATION</small>
 
-<div class="value">🇪🇺 Europe</div>
+<div class="value">🌍 Europe</div>
 
 </div>
 
@@ -72,9 +122,9 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 <small>PROXY STATUS</small>
 
-<div class="value" id="status">Not Connected</div>
+<div class="value" id="status">● Not Connected</div>
 
-<small>Backend connection not configured</small>
+<p>Backend connection not configured</p>
 
 </div>
 
@@ -84,7 +134,7 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 <input id="serverIP" placeholder="Server IP / Host">
 
-<input id="serverPort" placeholder="Proxy Port" type="number">
+<input id="serverPort" type="number" placeholder="Proxy Port">
 
 <button onclick="saveSettings()">Save Settings</button>
 
@@ -132,7 +182,7 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 <h3>⚙️ Panel Information</h3>
 
-<p>Version: 2.0</p>
+<p>Version: 2.1</p>
 
 <p>Platform: GitHub Pages</p>
 
@@ -142,7 +192,7 @@ input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid
 
 </div>
 
-<div class="footer">GT Proxy • Personal Dashboard</div>
+<div class="footer">GT PROXY • Dashboard v2.1</div>
 
 </div>
 
@@ -156,7 +206,7 @@ function saveSettings(){
 
  if(!ip || !port){
 
-  document.getElementById("settingsResult").textContent="Please enter server IP and port.";
+  document.getElementById("settingsResult").textContent="Please enter IP and Port.";
 
   return;
 
@@ -166,7 +216,23 @@ function saveSettings(){
 
  localStorage.setItem("gt_server_port",port);
 
- document.getElementById("settingsResult").textContent="Settings saved locally.";
+ document.getElementById("settingsResult").textContent="✓ Settings saved successfully!";
+
+}
+
+function loadSettings(){
+
+ const ip=localStorage.getItem("gt_server_ip")||"";
+
+ const port=localStorage.getItem("gt_server_port")||"";
+
+ document.getElementById("serverIP").value=ip;
+
+ document.getElementById("serverPort").value=port;
+
+ document.getElementById("settingsResult").textContent=
+
+ ip&&port?"✓ Saved settings loaded.":"No settings saved yet.";
 
 }
 
@@ -176,9 +242,7 @@ function searchVend(){
 
  document.getElementById("vendResult").textContent=
 
- world ? "Backend required to search vend locations in "+world+"."
-
- : "Please enter a world name.";
+ world?"Backend required to search vend locations in "+world+".":"Please enter a world name.";
 
 }
 
@@ -188,9 +252,7 @@ function searchWorld(){
 
  document.getElementById("worldResult").textContent=
 
- world ? "World search backend is not connected yet."
-
- : "Please enter a world name.";
+ world?"World search backend is not connected yet.":"Please enter a world name.";
 
 }
 
@@ -212,23 +274,7 @@ function resetSettings(){
 
  document.getElementById("serverPort").value="";
 
- document.getElementById("settingsResult").textContent="Local settings cleared.";
-
-}
-
-function loadSettings(){
-
- const ip=localStorage.getItem("gt_server_ip") || "";
-
- const port=localStorage.getItem("gt_server_port") || "";
-
- document.getElementById("serverIP").value=ip;
-
- document.getElementById("serverPort").value=port;
-
- document.getElementById("settingsResult").textContent=
-
- ip && port ? "Saved settings loaded." : "No settings saved yet.";
+ document.getElementById("settingsResult").textContent="Settings cleared.";
 
 }
 
