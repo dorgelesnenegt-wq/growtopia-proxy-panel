@@ -14,39 +14,17 @@
 
 *{box-sizing:border-box}
 
-body{
-
- margin:0;background:#10131d;color:white;
-
- font-family:Arial,sans-serif;padding:18px
-
-}
+body{margin:0;background:#10131d;color:white;font-family:Arial,sans-serif;padding:18px}
 
 .panel{max-width:520px;margin:20px auto}
 
-.header{
-
- text-align:center;padding:22px;
-
- background:#1b2030;border:1px solid #343d53;
-
- border-radius:18px;margin-bottom:18px
-
-}
+.header{text-align:center;padding:22px;background:#1b2030;border:1px solid #343d53;border-radius:18px;margin-bottom:18px}
 
 h1{color:#a78bfa;margin:5px}
 
 p{color:#aab2c5}
 
-.item{
-
- background:#1b2030;padding:18px;
-
- border-radius:13px;margin:12px 0;
-
- border:1px solid #343d53
-
-}
+.item{background:#1b2030;padding:18px;border-radius:13px;margin:12px 0;border:1px solid #343d53}
 
 .item h3{margin:0 0 12px;color:#c4b5fd}
 
@@ -54,29 +32,11 @@ small{color:#9ca3af}
 
 .value{font-size:18px;font-weight:bold;margin-top:7px}
 
-button{
-
- width:100%;padding:13px;border:0;
-
- border-radius:9px;background:#7955db;
-
- color:white;font-size:15px;margin-top:10px;
-
- cursor:pointer
-
-}
+button{width:100%;padding:13px;border:0;border-radius:9px;background:#7955db;color:white;font-size:15px;margin-top:10px;cursor:pointer}
 
 button:active{opacity:.7}
 
-input{
-
- width:100%;padding:13px;margin-top:9px;
-
- background:#10131d;border:1px solid #454d65;
-
- border-radius:9px;color:white;font-size:15px
-
-}
+input{width:100%;padding:13px;margin-top:9px;background:#10131d;border:1px solid #454d65;border-radius:9px;color:white;font-size:15px}
 
 .secondary{background:#343d53}
 
@@ -124,7 +84,7 @@ input{
 
 <input id="serverIP" placeholder="Server IP / Host">
 
-<input id="serverPort" placeholder="Proxy Port">
+<input id="serverPort" placeholder="Proxy Port" type="number">
 
 <button onclick="saveSettings()">Save Settings</button>
 
@@ -196,9 +156,7 @@ function saveSettings(){
 
  if(!ip || !port){
 
-  document.getElementById("settingsResult").textContent=
-
-  "Please enter server IP and port.";
+  document.getElementById("settingsResult").textContent="Please enter server IP and port.";
 
   return;
 
@@ -208,9 +166,7 @@ function saveSettings(){
 
  localStorage.setItem("gt_server_port",port);
 
- document.getElementById("settingsResult").textContent=
-
- "Settings saved locally.";
+ document.getElementById("settingsResult").textContent="Settings saved locally.";
 
 }
 
@@ -256,20 +212,30 @@ function resetSettings(){
 
  document.getElementById("serverPort").value="";
 
- document.getElementById("settingsResult").textContent=
-
- "Local settings cleared.";
+ document.getElementById("settingsResult").textContent="Local settings cleared.";
 
 }
 
-document.getElementById("serverIP").value=
+function loadSettings(){
 
- localStorage.getItem("gt_server_ip") || "";
+ const ip=localStorage.getItem("gt_server_ip") || "";
 
-document.getElementById("serverPort").value=
+ const port=localStorage.getItem("gt_server_port") || "";
 
- localStorage.getItem("gt_server_port") || "";
+ document.getElementById("serverIP").value=ip;
+
+ document.getElementById("serverPort").value=port;
+
+ document.getElementById("settingsResult").textContent=
+
+ ip && port ? "Saved settings loaded." : "No settings saved yet.";
+
+}
+
+loadSettings();
 
 </script>
+
 </body>
+
 </html>
