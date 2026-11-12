@@ -1,0 +1,12 @@
+
+export default function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Content-Type", "application/json");
+
+  res.status(200).json({
+    status: "online",
+    message: "Growtopia Proxy API is running",
+    vendFinder: "waiting_for_data_source",
+    worldFinder: "waiting_for_data_source"
+  });
+}
